@@ -229,6 +229,11 @@ class PretrainedConfig(PushToHubMixin):
 
         use_bfloat16 (`bool`, _optional_, defaults to `False`):
             Whether or not the model should use BFloat16 scalars (only used by some TensorFlow models).
+
+        > Onnxruntime specific parameters
+        
+        ort (`bool`, `_optional_`, defaults to `False`) 
+            Whether or not the model should use ORT.
     """
     model_type: str = ""
     is_composition: bool = False
@@ -252,6 +257,7 @@ class PretrainedConfig(PushToHubMixin):
         self.torchscript = kwargs.pop("torchscript", False)  # Only used by PyTorch models
         self.torch_dtype = kwargs.pop("torch_dtype", None)  # Only used by PyTorch models
         self.use_bfloat16 = kwargs.pop("use_bfloat16", False)
+        self.ort = kwargs.pop("ort", False)
         self.pruned_heads = kwargs.pop("pruned_heads", {})
         self.tie_word_embeddings = kwargs.pop(
             "tie_word_embeddings", True
